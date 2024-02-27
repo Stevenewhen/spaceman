@@ -5,14 +5,21 @@ const letters = ['a', 'b', 'c', 'd', 'e'];   ////so on. Letters all the way to
 const wordList = ['bicycle', 'bus', 'school', 'pencil']; // examples
 
 
-/////testing
+/////testing button
+// var aBtn = document.getElementById('btn');
 
-var tryButton = document.getElementById('btn');
+// aBtn.addEventListener('click', function() {
+//         console.log(this.innerText);
+// });
+/////////displays all buttons. >_< need each button to have an id/class
 
-tryButton.addEventListener('click', function() {
-        console.log(this.textContent);
-});
-/////////
+var buttons = document.getElementsByClassName('sigleBtn')
+    for(var i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', function() {
+            console.log(this.innerText);
+        });
+    }
+
 
 
 // const ROCKET_STAGES = {         /////use image sources similar to RPS for each stage)
@@ -23,10 +30,14 @@ tryButton.addEventListener('click', function() {
 //     5:
 // }
 
+var winner;
 var wordDisplay
 var selectedWords
 var word
-var currentWord = "";
+let currentWord = "";
+let letterArr = [];
+let hiddenArr = [];
+
  
 
 
@@ -40,28 +51,29 @@ function shuffleWords(cb) {
     }
 }
 
-console.log(wordList)
-
 function getRandomWord() {
     currentWord = wordList[wordList.length - 1];
     let letterArr = currentWord.split('');
-    // console.log("individual letter:", letterArr);
-    let wordContainer = document.getElementById('wordContainer');
-    wordContainer.innerHTML = '';
-    letterArr.forEach(function(letter) {
-        let letterEl = document.createElement('div.letter');
-        letterEl.textContent = letter;
-        wordContainer.appendChild(letterEl);
-    })
-    console.log(currentWord)
-    console.log(letterArr);
+    // console.log("individual letter:", letterArr);//
+    hiddenArr = Array(letterArr.length).fill("_");
+    // console.log("invsible word", hiddenArr);
+    let wordContainer = document.getElementById("wordContainer");
+    wordContainer.textContent = hiddenArr.join(" ");
+    // console.log(currentWord);
+}
+
+
+function correctLetter() {
+
 }
 
 
 function init() {
    shuffleWords();
    getRandomWord();
+
 }
+
 
 
 
