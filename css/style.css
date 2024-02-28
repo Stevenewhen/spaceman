@@ -1,3 +1,4 @@
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -5,64 +6,79 @@
 
 }
 body {
+    font-family: "Space Grotesk", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-style: normal;
+    background-color: black;
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: 100vh;
-    background-color: blue;
+    height: 100vh;
+    margin: 0;
 }
 
-.window {
-    display: flex;
-    justify-items: center;
-    border: solid black;
-    width: 75%;
-    background-color: white;
-    justify-content: center;
-}
-
-#rocketShip {
-    width: 80%;
-    max-width: 400px;
-    height: 60dvh;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    background-color: white;
-    border: solid black;
-    margin: 20px;
-}
-#guess {
-    margin-top: 30px;
-    padding: 20px;
-    border: solid black;
-    text-align: center;
-}
-img {
-    max-width: 100%;
-    margin-top: 20px;
-}
 .container {
     display: flex;
-    position: relative;
-    justify-items: center;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    background-color: white;
+    max-width: 800px;
+    margin-top: 1%;
+    background: white;
+    gap: 20px;
+    align-items: flex-end;
+    padding: 40px;
+    border-radius: 10px;
 }
+
+#rocketShipBox {
+    max-with: 100%;
+}
+
+#rocketShipBox img {
+   max-width: 300px;
+}
+
+#rocketShipBox h1 {
+    font-size: 3rem;
+    text-align: center;
+    margin-top: 20px;
+
+}
+.playbox {
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
 
 #wordContainer {
-    width: 75%;
-    justify-content: center;
+    justify-content: space-between;
+    font-size: 2rem;
     display: flex;
-    margin-top: 20px;
-    border: solid black;
-    font-size: 3rem;
+    gap: 10px;
+    list-style: none;
+    margin-right: auto;
 }
 
-#keyboard {
-    width: 75%;
+#wordContainer ul {
+    margin-right: 20px;
+}
+#wordContainer li {
+    list-style-type: none;
     display: flex;
-    justify-content: center;
     justify-items: center;
+    justify-content: space-between;
+    margin: 5px;
+    text-transform: uppercase;
+}
+
+.keyboard {
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: auto;
+}
+.singleBtn {
+    padding: 10px;
+    text-transform: uppercase;
 }

@@ -3,41 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap')</style>
     <link rel="stylesheet" href="css/style.css">
-    <script defer src="js/main.js"></script>
+    
     <title>Spaceman</title>
 </head>
 <body>
-<div class="window">
-    <div id="rocketShip">
+<div class="container">
+    <div id="rocketShipBox">
         <img src="assets/rocketship.svg" alt="">
-        <div id="guess">
-            <p>GUESSES: 0/5</p>
-        </div>
-
-    </div>
-    <div class="container">
         <h1>SPACE-MAN</h1>
-        <div id="wordContainer">
-            <p>Random Word Here!</p>
-        </div>
-        <div id="keyboard">
-        <div id="btn">
-            <button class='sigleBtn'>a</button><button class='sigleBtn'>b</button><button class='sigleBtn'>c</button><button class='sigleBtn'>d</button>
-            <button class='sigleBtn'>e</button><button class='sigleBtn'>f</button><button class='sigleBtn'>g</button><button class='sigleBtn'>h</button>
-            <button class='sigleBtn'>i</button><button class='sigleBtn'>j</button><button class='sigleBtn'>k</button><button class='sigleBtn'>l</button>
-            <button class='sigleBtn'>m</button><button class='sigleBtn'>n</button><button class='sigleBtn'>o</button><button class='sigleBtn'>p</button>
-            <button class='sigleBtn'>q</button><button class='sigleBtn'>r</button><button class='sigleBtn'>s</button><button class='sigleBtn'>t</button>
-            <button class='sigleBtn'>u</button><button class='sigleBtn'>v</button><button class='sigleBtn'>w</button><button class='sigleBtn'>x</button>
-            <button class='sigleBtn'>y</button><button class='sigleBtn'>z</button>
-        </div>
+        <h2 class="result"></h2>
     </div>
-</div>
+        <div id="guessContainer">
+            <p class="guess-count">Guess 0/5</p>
+        </div>
+            <div class="playbox">
+                <ul id="wordContainer">
+            <!-- <li> is insert here in javascaript -->
+                </ul>
+                <div class="keyboard">
+                    <button class='singleBtn'>a</button><button class='singleBtn'>b</button><button class='singleBtn'>c</button><button class='singleBtn'>d</button>
+                    <button class='singleBtn'>e</button><button class='singleBtn'>f</button><button class='singleBtn'>g</button><button class='singleBtn'>h</button>
+                    <button class='singleBtn'>i</button><button class='singleBtn'>j</button><button class='singleBtn'>k</button><button class='singleBtn'>l</button>
+                    <button class='singleBtn'>m</button><button class='singleBtn'>n</button><button class='singleBtn'>o</button><button class='singleBtn'>p</button>
+                    <button class='singleBtn'>q</button><button class='singleBtn'>r</button><button class='singleBtn'>s</button><button class='singleBtn'>t</button>
+                    <button class='singleBtn'>u</button><button class='singleBtn'>v</button><button class='singleBtn'>w</button><button class='singleBtn'>x</button>
+                    <button class='singleBtn'>y</button><button class='singleBtn'>z</button>
+                </div>
+        </div>
 </div>
     
-
-    <div id="geusses"></div>
-    <div id="results"></div>
-</div>
+<script src="js/main.js"></script>
 </body>
 </html>

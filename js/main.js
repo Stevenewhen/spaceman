@@ -1,70 +1,85 @@
 
 
-const letters = ['a', 'b', 'c', 'd', 'e'];   ////so on. Letters all the way to
+const buttons = document.getElementsByClassName('singleBtn')
 
-const wordList = ['bicycle', 'bus', 'school', 'pencil']; // examples
-
-
-/////testing button
-// var aBtn = document.getElementById('btn');
-
-// aBtn.addEventListener('click', function() {
-//         console.log(this.innerText);
-// });
-/////////displays all buttons. >_< need each button to have an id/class
-
-var buttons = document.getElementsByClassName('sigleBtn')
-    for(var i = 0; i < buttons.length; i++) {
-        buttons[i].addEventListener('click', function() {
-            console.log(this.innerText);
-        });
-    }
-
-
-
-// const ROCKET_STAGES = {         /////use image sources similar to RPS for each stage)
-//     1: {img: 'asset/rocket1.png'}
-//     2:
-//     3:
-//     4:
-//     5:
-// }
-
-var winner;
-var wordDisplay
-var selectedWords
-var word
+var wordDisplay = "";
+var clickedLetter = "";
+var selectedWords;
 let currentWord = "";
-let letterArr = [];
-let hiddenArr = [];
+var letterArr = [];
+var hiddenArr = [];
+var visibleArr = [];
+let numGuess = 5;
 
- 
+const wordList = ['galaxy', 'comet', 'asteroid', 'star', 'planet', 'universe']; 
+const wordContainer = document.getElementById("wordContainer");
+let numGuessContainer = document.getElementsByClassName("guess-count");
+let result = document.getElementsByClassName('result')[0];
 
 
 init();
 
+function handleButton(evt) {
+    if (evt.target.tagName !== 'BUTTON') return;
+    selectedLetter = evt.target.innerText.toLowerCase();
 
-function shuffleWords(cb) {
-    wordList.sort(() => Math.random() -0.5);
-    if (typeof callback === 'function') {
-        callback();
+    if (letterArr.includes(selectedLetter)) {
+        correctLetter(evt);
+        console.log("Match!");
+    } else {
+        numGuess = numGuess -1;
+        console.log("Number of Guess: ", numGuess);
+        updateNumGuess();
+        }
     }
-}
 
+
+//the getRandomWord from the last word from current word. Splitting
+//into an array putting it in the HTML wordContainer.
 function getRandomWord() {
     currentWord = wordList[wordList.length - 1];
-    let letterArr = currentWord.split('');
-    // console.log("individual letter:", letterArr);//
+    letterArr = currentWord.split('');
+    wordContainer.innerHTML = "";
     hiddenArr = Array(letterArr.length).fill("_");
-    // console.log("invsible word", hiddenArr);
-    let wordContainer = document.getElementById("wordContainer");
-    wordContainer.textContent = hiddenArr.join(" ");
-    // console.log(currentWord);
+    letterArr.forEach(function (letter) {
+        var li = document.createElement("li");
+        li.textContent = "_";
+        wordContainer.appendChild(li);
+    })
+    console.log(hiddenArr);
+    console.log(letterArr);
+    }
+
+
+// correctLetter using eventHandle
+function correctLetter(evt) {
+    let clickedLetter = evt.target.innerText.toLowerCase();
+    if (letterArr.includes(clickedLetter)) {
+        letterArr.forEach(function (letter, i) {
+            if (letterArr[i] === clickedLetter) {
+                wordContainer.children[i].innerText = clickedLetter;
+            }
+        })
+    }
+   }
+
+
+//Shuffle words
+function shuffleWords() {
+    wordList.sort(() => Math.random() -0.5);
 }
 
+//updates the wordContainer by rejoining the array.
+function displayWord() {
+    wordContainer.innerHTML = visibleArr.join(" ");
+}
 
-function correctLetter() {
+function updateNumGuess() {
+    numGuessContainer[0].innerText = `Guesses: ${numGuess}/5`;
 
+    if(numGuess === 0) {
+        result.innerText = `SPACE-LOSER!`;
+    }
 }
 
 
@@ -72,7 +87,12 @@ function init() {
    shuffleWords();
    getRandomWord();
 
+   for (var i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener('click', handleButton);
+   }
+   console.log(currentWord)
 }
+
 
 
 
@@ -103,7 +123,6 @@ function init() {
 
 // })
 
-// function render() {
 
 // }
 
