@@ -1,45 +1,69 @@
 
-
-const buttons = document.getElementsByClassName('singleBtn')
-
 var wordDisplay = "";
 var clickedLetter = "";
-var selectedWords;
 let currentWord = "";
-var letterArr = [];
-var hiddenArr = [];
-var visibleArr = [];
+let letterArr = [];
+let hiddenArr = [];
+let visibleArr = [];
 let numGuess = 5;
 
-const wordList = ['galaxy', 'comet', 'asteroid', 'star', 'planet', 'universe']; 
+
+const buttons = document.getElementsByClassName('singleBtn')
+buttons.disabled = false;
+const wordList = ['mars', 'comet', 'sun', 'star', 'planet', 'earth', 'running'];
 const wordContainer = document.getElementById("wordContainer");
 let numGuessContainer = document.getElementsByClassName("guess-count");
-let result = document.getElementsByClassName('result')[0];
+const result = document.querySelector('.result');
+const bonus = document.querySelector('.bonus');
 
 
 init();
 
+function init() {
+    shuffleWords();
+    getRandomWord();
+    activateButtons();
+
+    console.log(currentWord)
+}
+
 function handleButton(evt) {
-    if (evt.target.tagName !== 'BUTTON') return;
+    if (evt.target.tagName !== 'BUTTON' || evt.target.disabled) return;
     selectedLetter = evt.target.innerText.toLowerCase();
 
     if (letterArr.includes(selectedLetter)) {
         correctLetter(evt);
         console.log("Match!");
     } else {
-        numGuess = numGuess -1;
-        console.log("Number of Guess: ", numGuess);
-        updateNumGuess();
+        numGuess = numGuess - 1;
+        if (numGuess <= 0) {
+        } else {
+            evt.target.disabled = true
         }
+        updateNumGuess();
     }
+    console.log(hiddenArr);
+}
 
+
+function activateButtons() {
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', handleButton);
+    }
+}
+
+
+//Shuffle words
+function shuffleWords() {
+    wordList.sort(() => Math.random() - 0.5);
+}
 
 //the getRandomWord from the last word from current word. Splitting
 //into an array putting it in the HTML wordContainer.
 function getRandomWord() {
     currentWord = wordList[wordList.length - 1];
     letterArr = currentWord.split('');
-    wordContainer.innerHTML = "";
+    // wordContainer.innerHTML = "";
     hiddenArr = Array(letterArr.length).fill("_");
     letterArr.forEach(function (letter) {
         var li = document.createElement("li");
@@ -48,81 +72,73 @@ function getRandomWord() {
     })
     console.log(hiddenArr);
     console.log(letterArr);
-    }
+}
 
+//Display Word : showing the word on html with a joined array.
+function displayWord() {
+    wordContainer.innerHTML = visibleArr.join(" ");
+    checkWinner();
+}
 
 // correctLetter using eventHandle
 function correctLetter(evt) {
     let clickedLetter = evt.target.innerText.toLowerCase();
+
+
     if (letterArr.includes(clickedLetter)) {
         letterArr.forEach(function (letter, i) {
             if (letterArr[i] === clickedLetter) {
                 wordContainer.children[i].innerText = clickedLetter;
+                hiddenArr[i] = clickedLetter; //updates hiddenArr with correct Clickedletters.
             }
         })
     }
-   }
-
-
-//Shuffle words
-function shuffleWords() {
-    wordList.sort(() => Math.random() -0.5);
+    checkWinner();
 }
 
-//updates the wordContainer by rejoining the array.
-function displayWord() {
-    wordContainer.innerHTML = visibleArr.join(" ");
-}
-
+//Updates Number of Guess and Loser Indicator
 function updateNumGuess() {
-    numGuessContainer[0].innerText = `Guesses: ${numGuess}/5`;
-
-    if(numGuess === 0) {
+    numGuessContainer[0].innerText = `LIVES: x${numGuess}`;
+    if (numGuess === 4) {
+        document.getElementById("rocketimg").src = "../assets/rocketship4.png";
+    }
+    if (numGuess === 3) {
+        document.getElementById("rocketimg").src = "../assets/rocketship3.png";
+    }
+    if (numGuess === 2) {
+        document.getElementById("rocketimg").src = "../assets/rocketship2.png";
+    }
+    if (numGuess === 1) {
+        document.getElementById("rocketimg").src = "../assets/rocketship1.png";
+    }
+    if (numGuess === 0) {
+        document.getElementById("rocketimg").src = "../assets/rocketship0.png";
         result.innerText = `SPACE-LOSER!`;
+        bonus.innerText = `(was)`;
+        disableAllButtons();
+    }
+}
+
+//Checking Winner : the arrays need to be joined in order to truly === each other.
+function checkWinner() {
+    if (hiddenArr.join('') === letterArr.join('')) {
+        result.innerText = 'WINNER!';
+        disableAllButtons();
+        // console.log("WOOOOHH!!!");
+    }
+}
+
+function disableAllButtons() {
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].disabled = true;
     }
 }
 
 
-function init() {
-   shuffleWords();
-   getRandomWord();
-
-   for (var i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener('click', handleButton);
-   }
-   console.log(currentWord)
-}
 
 
 
+//playAgain()
+//reset()
 
-
-
-
-
-
-
-
-
-// function wrongGuesses( {    //total of wrong guesses  = 5 amount of gueses most likely use if === 5; return "you lose"
-
-// })
-
-// function keyboard( {          ////in html getElementById(most likely buttons)
-//                             // using array from letters[]
-//                             // //if wrong disable button.
-//                             // document.getElementById('btn')
-// })
-
-
-// function playAgain() {
-//     init();
-// }
-
-// function results(   {
-
-// })
-
-
-// }
-
+//fill array in with "_" https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill
