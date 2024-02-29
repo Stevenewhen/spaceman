@@ -17,10 +17,8 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    max-width: 100vh;
 
 }
-
 .container {
     display: flex;
     justify-content: center;
@@ -133,4 +131,9 @@ p.guess-count {
 .guess-container {
     display: flex;
     justify-content: left;
+}
+@media (min-width: 600px) {
+    .container {
+        max-width: 600px;
+    }
 }
