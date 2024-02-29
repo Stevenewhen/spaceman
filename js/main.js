@@ -6,15 +6,31 @@ let letterArr = [];
 let hiddenArr = [];
 let visibleArr = [];
 let numGuess = 5;
+let currentHint = "";
 
+//--*Bonus
+let currentIndex = 0;
+//
 
-const buttons = document.getElementsByClassName('singleBtn')
-buttons.disabled = false;
-const wordList = ['mars', 'comet', 'sun', 'star', 'planet', 'earth', 'running'];
+const wordList = ['astronaut', 'comet', 'sun', 'star', 'planet', 'earth', 'jupiter', 'saturn', 'gravity', 'moon'];
+const hintList = [
+    'A person who travels into outer space.',
+    'A bright and icy space object that moves through space.',
+    'The giant, hot ball of light in the sky.',
+    'A twinkling point of light in the night sky.',
+    'A large celestial body that orbits a star like Earth.',
+    'The blue and green world we live on.',
+    'The largest planet in our solar system.',
+    'A gas giant with beautiful rings around it.',
+    'The force that keeps things on the ground.',
+    'A rocky body that orbits Earth, it shows at night.'
+  ];
+
 const wordContainer = document.getElementById("wordContainer");
 let numGuessContainer = document.getElementsByClassName("guess-count");
 const result = document.querySelector('.result');
 const bonus = document.querySelector('.bonus');
+const buttons = document.getElementsByClassName('singleBtn')
 
 
 init();
@@ -23,6 +39,7 @@ function init() {
     shuffleWords();
     getRandomWord();
     activateButtons();
+    numGuessContainer[0].innerText = `x${numGuess}`;
 
     console.log(currentWord)
 }
@@ -33,7 +50,7 @@ function handleButton(evt) {
 
     if (letterArr.includes(selectedLetter)) {
         correctLetter(evt);
-        console.log("Match!");
+        // console.log("Match!");
     } else {
         numGuess = numGuess - 1;
         if (numGuess <= 0) {
@@ -42,7 +59,7 @@ function handleButton(evt) {
         }
         updateNumGuess();
     }
-    console.log(hiddenArr);
+    // console.log(hiddenArr);
 }
 
 
@@ -58,10 +75,11 @@ function shuffleWords() {
     wordList.sort(() => Math.random() - 0.5);
 }
 
-//the getRandomWord from the last word from current word. Splitting
-//into an array putting it in the HTML wordContainer.
+
+//Get Random Word
 function getRandomWord() {
-    currentWord = wordList[wordList.length - 1];
+    currentWord = wordList[currentIndex];
+    currentHint = hintList[currentIndex];
     letterArr = currentWord.split('');
     // wordContainer.innerHTML = "";
     hiddenArr = Array(letterArr.length).fill("_");
@@ -70,9 +88,10 @@ function getRandomWord() {
         li.textContent = "_";
         wordContainer.appendChild(li);
     })
-    console.log(hiddenArr);
-    console.log(letterArr);
+    console.log(wordList[currentIndex]);
+    console.log(currentHint)
 }
+
 
 //Display Word : showing the word on html with a joined array.
 function displayWord() {
@@ -83,7 +102,6 @@ function displayWord() {
 // correctLetter using eventHandle
 function correctLetter(evt) {
     let clickedLetter = evt.target.innerText.toLowerCase();
-
 
     if (letterArr.includes(clickedLetter)) {
         letterArr.forEach(function (letter, i) {
@@ -98,22 +116,28 @@ function correctLetter(evt) {
 
 //Updates Number of Guess and Loser Indicator
 function updateNumGuess() {
-    numGuessContainer[0].innerText = `LIVES: x${numGuess}`;
+    numGuessContainer[0].innerText = `x${numGuess}`;
     if (numGuess === 4) {
-        document.getElementById("rocketimg").src = "../assets/rocketship4.png";
+        document.getElementById("rocketimg").src = "assets/rocketship4.png";
+        bonus.innerText = `...there goes the right wing`;
     }
     if (numGuess === 3) {
-        document.getElementById("rocketimg").src = "../assets/rocketship3.png";
+        document.getElementById("rocketimg").src = "assets/rocketship3.png";
+        bonus.innerText = `left wing damaged.`;
+
     }
     if (numGuess === 2) {
-        document.getElementById("rocketimg").src = "../assets/rocketship2.png";
+        document.getElementById("rocketimg").src = "assets/rocketship2.png";
+        bonus.innerText = `I can't see!`;
+
     }
     if (numGuess === 1) {
-        document.getElementById("rocketimg").src = "../assets/rocketship1.png";
+        document.getElementById("rocketimg").src = "assets/rocketship1.png";
+        bonus.innerText = `Houston, we have a problem!`;
     }
     if (numGuess === 0) {
-        document.getElementById("rocketimg").src = "../assets/rocketship0.png";
-        result.innerText = `SPACE-LOSER!`;
+        document.getElementById("rocketimg").src = "assets/rocketship0.png";
+        result.innerText = `YOU DIED!`;
         bonus.innerText = `(was)`;
         disableAllButtons();
     }
@@ -142,3 +166,4 @@ function disableAllButtons() {
 //reset()
 
 //fill array in with "_" https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill
+//

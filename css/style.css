@@ -2,7 +2,7 @@
 * {
     box-sizing: border-box;
     margin: 0;
-    pading: 0;
+    padding: 0;
 
 }
 body {
@@ -21,53 +21,63 @@ body {
 
 .container {
     display: flex;
-    max-width: 800px;
+    justify-content: center;
+    justify-items: center;
+    max-width: 90%;
     max-height: 600;
-    margin-top: 1%;
     background: white;
     gap: 20px;
-    align-items: flex-end;
-    padding: 40px;
+    align-items: center;
+    padding: 30px;
     border-radius: 10px;
 }
 
 #rocketShipBox {
-    max-width: 100%;
+    text-align: center;
+    max-width: 300px;
+    display: column;
 }
 
 #rocketShipBox img {
-   max-width: 300px;
-   max-height: 500px;
+    max-width: 75%;
+    height: auto;
 }
 
 #rocketShipBox h1 {
-    font-size: 3rem;
+    font-size: 2rem;
+    max-width: 300px;
     text-align: center;
     margin-top: 20px;
+    min-width: 181px;
 
 }
 .playbox {
     text-align: center;
-    justify-content: center;
-    margin-bottom: 15px;
+    margin: 20px;
 }
 
 
 #wordContainer {
-    justify-content: space-between;
-    font-size: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-size: 1.5rem;
     display: flex;
     gap: 10px;
     list-style: none;
-    margin-right: 40px;
+    max-width: 100%;
+    margin-right: 0px;
+    min-width: 305px;
 }
 
 #wordContainer ul {
-    margin-right: 20px;
+    max-width: 300px;
+    border-sizing: border-box;
+
 }
 #wordContainer li {
     list-style-type: none;
-    display: flex;
+    flex: none;
+    max-width: 300px;
     justify-items: center;
     justify-content: space-between;
     margin: 5px;
@@ -75,11 +85,13 @@ body {
 }
 
 .keyboard {
-
-    display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    margin-left: auto;
+    justify-items: center;
+    display: flex;
+    max-width: 300px;
+    flex-wrap: wrap;
+    min-width: 300px;
+    margin-top: 5%;
 }
 .singleBtn {
     padding: 10px;
@@ -96,7 +108,28 @@ p.guess-count {
     text-align: right;
     font-weight: 900;
 }
-h3 {
+h4 {
     margin: 0;
     text-align: center;
+}
+
+.singleBtn:hover {
+    background-color: BLACK;
+    color: white;
+    border: none;
+    display: inline-block;
+
+}
+p.guess-count {
+    text-align: center;
+}
+.lives {
+    flex: none;
+    justify-content: left;
+    justify-items: left;
+    width: 15%;
+}
+.guess-container {
+    display: flex;
+    justify-content: left;
 }
