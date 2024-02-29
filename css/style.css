@@ -13,18 +13,19 @@ body {
     background-color: black;
     display: flex;
     justify-content: center;
+    justify-items: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    max-width: 100%;
+    max-width: 100vh;
+
 }
 
 .container {
     display: flex;
     justify-content: center;
+    position: absolute;
     justify-items: center;
-    max-width: 90%;
-    max-height: 600;
     background: white;
     gap: 20px;
     align-items: center;
