@@ -132,8 +132,3 @@ p.guess-count {
     display: flex;
     justify-content: left;
 }
-@media (min-width: 600px) {
-    .container {
-        max-width: 600px;
-    }
-}
