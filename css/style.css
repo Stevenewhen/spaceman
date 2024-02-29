@@ -22,6 +22,7 @@ body {
 .container {
     display: flex;
     justify-content: center;
+    max-height: 100vh;
     position: absolute;
     justify-items: center;
     background: white;

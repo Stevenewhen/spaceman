@@ -118,25 +118,25 @@ function correctLetter(evt) {
 function updateNumGuess() {
     numGuessContainer[0].innerText = `x${numGuess}`;
     if (numGuess === 4) {
-        document.getElementById("rocketimg").src = "assets/rocketship4.png";
+        document.getElementById("rocketimg").src = "//i.imgur.com/tgX83SC.png";
         bonus.innerText = `...there goes the right wing`;
     }
     if (numGuess === 3) {
-        document.getElementById("rocketimg").src = "assets/rocketship3.png";
+        document.getElementById("rocketimg").src = "//i.imgur.com/nZuHw87.png";
         bonus.innerText = `left wing damaged.`;
 
     }
     if (numGuess === 2) {
-        document.getElementById("rocketimg").src = "assets/rocketship2.png";
+        document.getElementById("rocketimg").src = "//i.imgur.com/PBJ0KPf.png";
         bonus.innerText = `I can't see!`;
 
     }
     if (numGuess === 1) {
-        document.getElementById("rocketimg").src = "assets/rocketship1.png";
+        document.getElementById("rocketimg").src = "//i.imgur.com/UO16uq1.png";
         bonus.innerText = `Houston, we have a problem!`;
     }
     if (numGuess === 0) {
-        document.getElementById("rocketimg").src = "assets/rocketship0.png";
+        document.getElementById("rocketimg").src = "//i.imgur.com/qkMpXkQ.png";
         result.innerText = `YOU DIED!`;
         bonus.innerText = `(was)`;
         disableAllButtons();
