@@ -70,7 +70,7 @@ body {
 }
 
 #wordContainer ul {
-    max-width: 300px;
+    min-width: 730px;;
 
 }
 #wordContainer li {
@@ -129,6 +129,10 @@ p.guess-count {
     width: 15%;
 }
 .guess-container {
+    position: absolute;
     display: flex;
     justify-content: left;
+}
+h6 {
+    margin-top: 0;
 }
