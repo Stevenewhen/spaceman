@@ -1,5 +1,5 @@
 # <SPACE-MAN>
-You're a SPACEMAN traveling through the ocean of stars but there's one thing... You can remember the password in order to move your ship away from incomming asteroids. Choose your letter wisley and good luck SPACE-MAN!
+You're a SPACEMAN traveling through the ocean of stars but there's one thing... You can't remember the password in order to manuver ship away from incomming asteroids. Choose your letter wisley and good luck SPACE-MAN!
 
 # Screenshot
 
