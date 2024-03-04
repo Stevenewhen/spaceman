@@ -1,5 +1,5 @@
 # SPACE-MAN
-You're a SPACEMAN traveling through the ocean of stars but there's one thing... You can't remember the password in order to manuver ship away from incomming asteroids. Choose your letter wisley and good luck SPACE-MAN!
+You're a **SPACE-MAN** traveling through the ocean of stars but there's one thing... You can't remember the password in order to manuver the ship away from incomming asteroids. Choose your letter wisley and good luck **SPACE-MAN**!
 
 # Screenshot
 
@@ -14,14 +14,15 @@ You're a SPACEMAN traveling through the ocean of stars but there's one thing... 
 
 # Getting Started
 
-[Click to View Project Planning](your Trello url here)
-[Click to Play Connect Four!](your deployment url here)
+- Play **SPACE-MAN** :
+(https://stevenewhen.github.io/spaceman/)
+
 
 # Next Steps
 
 - I would like to add replayability to the game that would +1 to lives once a correct letter is input
 - Add in an option that will cost the player 2 lives if they click on the HINT button.
-- A prompt asking player if they are sure they would like to use lives in order to reveal hint.
+- A modal asking player if they are sure they would like to use lives in order to reveal hint.
 - A start and finish element that once a player correct geusses the word the ship would be once step closer to the goal.
 - Sound would be a good add-on for the count down starting from life 5.
 - On an incorrect guess the window would shake.
