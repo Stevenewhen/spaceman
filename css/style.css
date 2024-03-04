@@ -22,6 +22,7 @@ body {
 .container {
     display: flex;
     justify-content: center;
+    max-height: 100vh;
     position: absolute;
     justify-items: center;
     background: white;
@@ -69,7 +70,7 @@ body {
 }
 
 #wordContainer ul {
-    max-width: 300px;
+    min-width: 730px;;
 
 }
 #wordContainer li {
@@ -128,6 +129,10 @@ p.guess-count {
     width: 15%;
 }
 .guess-container {
+    position: absolute;
     display: flex;
     justify-content: left;
+}
+h6 {
+    margin-top: 0;
 }

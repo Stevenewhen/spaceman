@@ -1,19 +1,5 @@
-
-var wordDisplay = "";
-var clickedLetter = "";
-let currentWord = "";
-let letterArr = [];
-let hiddenArr = [];
-let visibleArr = [];
-let numGuess = 5;
-let currentHint = "";
-
-//--*Bonus
-let currentIndex = 0;
-//
-
-const wordList = ['astronaut', 'comet', 'sun', 'star', 'planet', 'earth', 'jupiter', 'saturn', 'gravity', 'moon'];
-const hintList = [
+const WORDLIST = ['astronaut', 'comet', 'sun', 'star', 'planet', 'earth', 'jupiter', 'saturn', 'gravity', 'moon'];
+const HINTLIST = [
     'A person who travels into outer space.',
     'A bright and icy space object that moves through space.',
     'The giant, hot ball of light in the sky.',
@@ -26,8 +12,23 @@ const hintList = [
     'A rocky body that orbits Earth, it shows at night.'
   ];
 
+var wordDisplay = "";
+var clickedLetter = "";
+let letterArr = [];
+let hiddenArr = [];
+let visibleArr = [];
+let numGuess = 5;
+
+//--*Bonus/test
+let currentIndex = 0;
+let randomIdx = Math.floor(Math.random() * WORDLIST);
+let currentWord = WORDLIST[randomIdx];
+let currentHint = HINTLIST[randomIdx];
+//
+
+
 const wordContainer = document.getElementById("wordContainer");
-let numGuessContainer = document.getElementsByClassName("guess-count");
+let numGuessContainer = document.getElementsByClassName("guess-count")[0];
 const result = document.querySelector('.result');
 const bonus = document.querySelector('.bonus');
 const buttons = document.getElementsByClassName('singleBtn')
@@ -36,17 +37,18 @@ const buttons = document.getElementsByClassName('singleBtn')
 init();
 
 function init() {
-    shuffleWords();
+    // shuffleWords();
     getRandomWord();
     activateButtons();
-    numGuessContainer[0].innerText = `x${numGuess}`;
-
-    console.log(currentWord)
+    numGuessContainer.innerText = `x${numGuess}`;
+    document.getElementById("hint").innerText = `Hint: ${currentHint}`;
+    console.log(currentWord);
+    console.log(currentHint);
 }
 
 function handleButton(evt) {
     if (evt.target.tagName !== 'BUTTON' || evt.target.disabled) return;
-    selectedLetter = evt.target.innerText.toLowerCase();
+    const selectedLetter = evt.target.innerText.toLowerCase();
 
     if (letterArr.includes(selectedLetter)) {
         correctLetter(evt);
@@ -70,26 +72,26 @@ function activateButtons() {
 }
 
 
-//Shuffle words
-function shuffleWords() {
-    wordList.sort(() => Math.random() - 0.5);
-}
+// Shuffle words
+// function shuffleWords() {
+//     WORDLIST.sort(() => Math.random() - 0.5);
+//     HINTLIST.sort(() => Math.random() - 0.5);
+// }
 
 
-//Get Random Word
+//Get Random Word   *UPDATE* getRandom now shuffles and it keeps HINTLISTidx the same as WORDLISTidx.//
 function getRandomWord() {
-    currentWord = wordList[currentIndex];
-    currentHint = hintList[currentIndex];
+    randomIdx = Math.floor(Math.random() * WORDLIST.length);
+    currentWord = WORDLIST[randomIdx];
+    currentHint = HINTLIST[randomIdx];
     letterArr = currentWord.split('');
-    // wordContainer.innerHTML = "";
     hiddenArr = Array(letterArr.length).fill("_");
+    wordContainer.innerHTML = '';
     letterArr.forEach(function (letter) {
-        var li = document.createElement("li");
+        const li = document.createElement("li");
         li.textContent = "_";
         wordContainer.appendChild(li);
-    })
-    console.log(wordList[currentIndex]);
-    console.log(currentHint)
+    });
 }
 
 
@@ -111,35 +113,37 @@ function correctLetter(evt) {
             }
         })
     }
+    updateNumGuess();
     checkWinner();
 }
 
 //Updates Number of Guess and Loser Indicator
 function updateNumGuess() {
-    numGuessContainer[0].innerText = `x${numGuess}`;
+    numGuessContainer.innerText = `x${numGuess}`;
     if (numGuess === 4) {
-        document.getElementById("rocketimg").src = "assets/rocketship4.png";
+        document.getElementById("rocketimg").src = "//i.imgur.com/tgX83SC.png";
         bonus.innerText = `...there goes the right wing`;
     }
     if (numGuess === 3) {
-        document.getElementById("rocketimg").src = "assets/rocketship3.png";
+        document.getElementById("rocketimg").src = "//i.imgur.com/nZuHw87.png";
         bonus.innerText = `left wing damaged.`;
 
     }
     if (numGuess === 2) {
-        document.getElementById("rocketimg").src = "assets/rocketship2.png";
+        document.getElementById("rocketimg").src = "//i.imgur.com/PBJ0KPf.png";
         bonus.innerText = `I can't see!`;
 
     }
     if (numGuess === 1) {
-        document.getElementById("rocketimg").src = "assets/rocketship1.png";
+        document.getElementById("rocketimg").src = "//i.imgur.com/UO16uq1.png";
         bonus.innerText = `Houston, we have a problem!`;
     }
-    if (numGuess === 0) {
-        document.getElementById("rocketimg").src = "assets/rocketship0.png";
+    if (numGuess <= 0) {
+        document.getElementById("rocketimg").src = "//i.imgur.com/qkMpXkQ.png";
         result.innerText = `YOU DIED!`;
         bonus.innerText = `(was)`;
         disableAllButtons();
+        showAllLetters();
     }
 }
 
@@ -158,6 +162,14 @@ function disableAllButtons() {
     }
 }
 
+function showAllLetters() {
+    wordContainer.innerHTML = '';
+    for (let i = 0; i < currentWord.length; i++) {
+        const li = document.createElement('li');
+        li.textContent = currentWord[i];
+        wordContainer.appendChild(li); // Append the new li element
+    }
+}
 
 
 
