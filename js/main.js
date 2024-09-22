@@ -79,14 +79,6 @@ function activateButtons() {
     }
 }
 
-
-// Shuffle words
-// function shuffleWords() {
-//     WORDLIST.sort(() => Math.random() - 0.5);
-//     HINTLIST.sort(() => Math.random() - 0.5);
-// }
-
-
 //Get Random Word   *UPDATE* getRandom now shuffles and it keeps HINTLISTidx the same as WORDLISTidx.//
 function getRandomWord() {
     randomIdx = Math.floor(Math.random() * WORDLIST.length);
@@ -141,19 +133,19 @@ function updateNumGuess() {
     numGuessContainer.innerText = `x${numGuess}`;
 
     if (numGuess === 4) {
-        rocketImg.src = "/assets/rocketship4.png";
+        rocketImg.src = "docs/assets/rocketship4.png";
         bonus.innerText = `...there goes the right wing`;
     } else if (numGuess === 3) {
-        rocketImg.src = "/assets/rocketship3.png";
+        rocketImg.src = "docs/assets/rocketship3.png";
         bonus.innerText = `left wing damaged.`;
     } else if (numGuess === 2) {
-        rocketImg.src = "/assets/rocketship2.png";
+        rocketImg.src = "docs/assets/rocketship2.png";
         bonus.innerText = `I can't see!`;
     } else if (numGuess === 1) {
-        rocketImg.src = "/assets/rocketship1.png";
+        rocketImg.src = "docs/assets/rocketship1.png";
         bonus.innerText = `Houston, we have a problem!`;
     } else if (numGuess <= 0) {
-        rocketImg.src = "/assets/rocketship0.png";
+        rocketImg.src = "docs/assets/rocketship0.png";
         result.innerText = `YOU DIED!`;
         bonus.innerText = `(The word was: ${currentWord})`;
         disableAllButtons();
