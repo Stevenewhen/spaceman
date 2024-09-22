@@ -12,8 +12,8 @@ const HINTLIST = [
     'A rocky body that orbits Earth, it shows at night.'
   ];
 
-var wordDisplay = "";
-var clickedLetter = "";
+let wordDisplay = "";
+let clickedLetter = "";
 let letterArr = [];
 let hiddenArr = [];
 let visibleArr = [];
@@ -21,7 +21,7 @@ let numGuess = 5;
 
 //--*Bonus/test
 let currentIndex = 0;
-let randomIdx = Math.floor(Math.random() * WORDLIST);
+let randomIdx = Math.floor(Math.random() * WORDLIST.length);
 let currentWord = WORDLIST[randomIdx];
 let currentHint = HINTLIST[randomIdx];
 //
@@ -33,6 +33,14 @@ const result = document.querySelector('.result');
 const bonus = document.querySelector('.bonus');
 const buttons = document.getElementsByClassName('singleBtn')
 
+//MODAL ELEMENTS
+const hintBtn = document.getElementById('hintBtn');
+const hintModal = document.getElementById('hintModal');
+const confirmHintBtn = document.getElementById('confirmHintBtn');
+const cancelHintBtn = document.getElementById('cancelHintBtn');
+//
+
+
 
 init();
 
@@ -42,8 +50,8 @@ function init() {
     activateButtons();
     numGuessContainer.innerText = `x${numGuess}`;
     document.getElementById("hint").innerText = `Hint: ${currentHint}`;
-    console.log(currentWord);
-    console.log(currentHint);
+    // console.log(currentWord);
+    // console.log(currentHint);
 }
 
 function handleButton(evt) {
@@ -118,41 +126,62 @@ function correctLetter(evt) {
 }
 
 //Updates Number of Guess and Loser Indicator
+let previousNumGuess = numGuess;
+
 function updateNumGuess() {
+    const rocketImg = document.getElementById("rocketimg");
+
+    if (numGuess < previousNumGuess) {
+        rocketImg.classList.add('shake');
+        setTimeout(() => {
+            rocketImg.classList.remove('shake');
+        }, 500);
+    }
+
     numGuessContainer.innerText = `x${numGuess}`;
+
     if (numGuess === 4) {
-        document.getElementById("rocketimg").src = "//i.imgur.com/tgX83SC.png";
+        rocketImg.src = "/assets/rocketship4.png";
         bonus.innerText = `...there goes the right wing`;
-    }
-    if (numGuess === 3) {
-        document.getElementById("rocketimg").src = "//i.imgur.com/nZuHw87.png";
+    } else if (numGuess === 3) {
+        rocketImg.src = "/assets/rocketship3.png";
         bonus.innerText = `left wing damaged.`;
-
-    }
-    if (numGuess === 2) {
-        document.getElementById("rocketimg").src = "//i.imgur.com/PBJ0KPf.png";
+    } else if (numGuess === 2) {
+        rocketImg.src = "/assets/rocketship2.png";
         bonus.innerText = `I can't see!`;
-
-    }
-    if (numGuess === 1) {
-        document.getElementById("rocketimg").src = "//i.imgur.com/UO16uq1.png";
+    } else if (numGuess === 1) {
+        rocketImg.src = "/assets/rocketship1.png";
         bonus.innerText = `Houston, we have a problem!`;
-    }
-    if (numGuess <= 0) {
-        document.getElementById("rocketimg").src = "//i.imgur.com/qkMpXkQ.png";
+    } else if (numGuess <= 0) {
+        rocketImg.src = "/assets/rocketship0.png";
         result.innerText = `YOU DIED!`;
-        bonus.innerText = `(was)`;
+        bonus.innerText = `(The word was: ${currentWord})`;
         disableAllButtons();
         showAllLetters();
+        showModal("MISSION FAILED!");
     }
+
+    previousNumGuess = numGuess;
 }
+
+
+function showModal(message) {
+    const modal = document.getElementById('tryAgainModal');
+    const resultText = document.getElementById('modal-result-text');
+    resultText.innerText = message;
+    modal.style.display = 'block';
+}
+
+document.getElementById('tryAgainBtn').addEventListener('click', function() {
+    window.location.reload();
+});
 
 //Checking Winner : the arrays need to be joined in order to truly === each other.
 function checkWinner() {
     if (hiddenArr.join('') === letterArr.join('')) {
         result.innerText = 'WINNER!';
         disableAllButtons();
-        // console.log("WOOOOHH!!!");
+        showModal("WINNER!");
     }
 }
 
@@ -171,11 +200,24 @@ function showAllLetters() {
     }
 }
 
+hintBtn.addEventListener('click', function() {
+    if (numGuess > 2) {
+        hintModal.style.display = 'block';
+    } else {
+        alert("You don't have enough lives to view hint!");
+    }
+});
 
+confirmHintBtn.addEventListener('click', function() {
+    numGuess -= 2;
+    updateNumGuess();
+    document.getElementById("hint").style.display = 'block';
+    hintModal.style.display = 'none';
+    hintBtn.disabled = true;
+});
 
+cancelHintBtn.addEventListener('click', function() {
+    hintModal.style.display = 'none';
+});
 
-//playAgain()
-//reset()
-
-//fill array in with "_" https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill
-//
+document.getElementById("hint").style.display = 'none';
